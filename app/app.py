@@ -1,6 +1,6 @@
 # IMPORTING FUNCTIONS FROM CORE.PY SCRIPT
-from core import add_new_product, delete_product
-
+from src.core import add_new_product, delete_product
+from src.data_structure import data_base
 # 
 app_start = True
 
@@ -97,3 +97,4 @@ while app_start == True:
 print('bye')
 
 # update stock txt file
+print(data_base)
