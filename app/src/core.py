@@ -13,20 +13,56 @@ def show_items_in_list(a_list:list):
     for index, item in enumerate(a_list, 1):
         print(f'{index}. {item}')
 
+# ------ PRODUCT FUNCTIONS --------
+def add_new_product(products:list):
+    '''
+    This function takes user input 
+    for ITEM, PRICE and STOCK and
+    creates a dictionary and 
+    appends to a list.
+    '''
+    try:
+        item = input('Product: ')
+        price = float(input('Price: £'))
+        quantity = int(input('Stock Quantity:'))
+    except TypeError:
+        'ITEM has to be word. PRICE and QUANTITY msut be numerical values'
+    product = {
+        'item': item,
+        'price': price,
+        'stock': quantity,
+    }
+    products.append(product)
+    return products
 
-def add_new_product(x:str, list_stock:list):
-    
-    if x not in list_stock:
-        return list_stock.append(x)
+# FUNCTION TO CHECK IF ITEM IS IN LIST/DICTIONARY
+def check_item(products:list, user_input:str):
+    for item in range(len(products)):
+        if products[item]['item'] == user_input:
+            return True
+        else:
+            return False
+
+# Function to delete product
+def delete_product(products:list):
+    user_input = input('ITEM: ')
+    for item in range(len(products)): 
+        if products[item]['item'] == user_input: 
+            del products[item] 
+            return products
     else:
-        return 'product already in stock'
+        print('ITEM NO IN STOCK')
+    return products
 
-
-def delete_product(item:str, stock_list:list):
-    if item in stock_list:
-        return stock_list.remove(item)
-    else:
-        return 'product not in stock'
+# function to update product
+def update_product(products:list):
+    user_input = input('ITEM: ')
+    for item in range(len(products)):
+        if products[item]['item'] == user_input:
+            products[item]['item'] = user_input
+        else:
+            return 'INVALID INPUT'
+    return products
 
 # # CHECK ERROR
 # def update_item(a_list:list, list_item:str, to_update:str):

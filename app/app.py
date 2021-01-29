@@ -1,100 +1,96 @@
 # IMPORTING FUNCTIONS FROM CORE.PY SCRIPT
-from src.core import add_new_product, delete_product
+from src.core import add_new_product, delete_product, update_product
+from src.product_functions import products_function
 from src.data_structure import data_base
-# 
-app_start = True
-
+#
 # read products product (could )
-with open('app/data/products.txt', 'r') as f:
-    stock_list = f.read().splitlines()
-# read courier file and pass it to a list
-with open('app/data/couriers.txt', 'r') as f:
-    couriers_list = f.read().splitlines()
+# with open('app/data/products.txt', 'r') as f:
+#     stock_list = f.read().splitlines()
+# # read courier file and pass it to a list
+# with open('app/data/couriers.txt', 'r') as f:
+#     couriers_list = f.read().splitlines()
 
+# --- DATA ---
+# PRODUCT data - DICT
+products = [{
+    'item': 'banana',
+    'price': 0.69,
+    'stock': 12,
+}, {
+    'item': 'apple',
+    'price': 0.75,
+    'stock': 10,
+}]
 
-# PRODUCT MENU DICT
-products_menu = {
-    '0': 'return main menu',
-    '1': stock_list,
-    '2': 'add new product',
-    '3': 'Which product to update: ',
-    '4': 'Which product would you like to delete? ',
-}
+# COURIER data -- list
+courier = []
 
-# COURIER MENU DICT
-courier_menu = {
-    '0': 'return main menu',
-    '1': couriers_list,
-    '2': 'add new courier',
-    '3': 'update courier',
-    '4':'delete courier',
-}
+# ORDERS DATA -- DICT
+orders = []
+
+# DICTIONARY WITH ALL THE DATA COMBINED
+data = {'products': products, 'courier': courier, 'orders': orders}
 
 # MAIN MENU DICT
-options_menu = {
-    '0': False,
-    '1': products_menu,
-    '2': courier_menu,
-}
+# options_menu = {
+#     '0': False,
+#     '1': products_menu,
+#     '2': courier_menu,
+# }
 
 # MAIN MENU OPTIONS
-main_menu_options = 'MAIN MENU\n 0: EXIT APP \n 1: MENU \n\n SELECTION: '
-# Product Menu Options
-product_menu_options = 'PRODUCT MENU \n\n 0: RETURN MAIN MENU \n 1: PRODUCTS IN STOCK \n 2: ADD NEW PRODUCT \n 3: UPDATE PRODUCT \n 4: DELETE PRODUCT \n'
+main_menu_options = '''
+    ---MAIN MENU---
+    [0] - EXIT APP
+    [1] - MENU
+    '''
 
-courier_menu_options = 'COURIER MENU \n\n 0: RETURN MAIN MENU \n 1: COURIERS AVAILABLE \n 2: ADD NEW COURIER \n 3: UPDATE A COURIER \n 4: DELETE COURIER \n'
+
+courier_menu_options = '''
+    ---COURIER MENU---
+    [0] - RETURN
+    [1] - COURIERS
+    [2] - ADD COURIER
+    [3] - UPDATE COURIER
+    [4] - REMOVE COURIER
+    '''
+
 
 # Keeps programme running
-while app_start == True:
-    print('WELCOME, PLEASE SELECT ONE OF THE FOLLOWING OPTIONS')
-    
+while True:
     # Print MAIN MENU
     print(main_menu_options)
+    # Takes menu selection as input
     menu_select = input('SELECT OPTION: ')
     if menu_select == '0':
         break
 
-    # 
+    # ----- PRODUCT MENU -----
     elif menu_select == '1':
-        # print product menu options
-        print(product_menu_options)
+        products_function(products)
 
-        # VARIABLE SETTING OPTION FOR PRODUCT MENU
-        menu_option_select = input('OPTION: ')
-        # OPTION 1: products in stock
-        if menu_option_select == '1':
-            for index, item in enumerate(stock_list, 1):
-                print(f'{index}. {item}')
-                continue
+
         
-        # OPTION 2: add new product
-        elif menu_option_select == '2':
-            new_product = input('What product would you like to add? ')
-            add_new_product(new_product, stock_list)
-            print(stock_list)
-            continue
-
         # OPTION 3: Update Product
-        elif menu_option_select == '3':
-            update_product_in_stock = input('Which product would you like to update?')
+        # elif menu_option_select == '3':
+        #     update_product_in_stock = input(
+        #         'Which product would you like to update?')
 
             # need to create function
 
             # OPTION 4: Delete Product
-        elif menu_option_select == '4':
-            for index, item in enumerate(stock_list):
-                print(f'PRODUCT: {index}. {item}')
-            delete_product = input(f'What product would you like to delete?')
-            
-        else:
-            print('something went wrong')
-            break
+        # elif menu_option_select == '4':
+        #     for index, item in enumerate(stock_list):
+        #         print(f'PRODUCT: {index}. {item}')
+        #     delete_product = input(f'What product would you like to delete?')
+
+        # else:
+        #     print('something went wrong')
+        #     break
 
     else:
         print('Selection not valid')
         continue
-        
+
 print('bye')
 
-# update stock txt file
-print(data_base)

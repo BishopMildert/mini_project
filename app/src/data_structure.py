@@ -6,8 +6,8 @@ data_base = {
             'stock_quantity':10
         },
         {
-        'item': 'coke',
-        'price': 1,
+        'item': 'pepsi',
+        'price': 0.9,
         'stock_quantity': 10
         },
 
@@ -54,4 +54,4 @@ data_base = {
      ]
 }
 
-print(type(data_base['products'][1]))
+print(data_base['products'])
